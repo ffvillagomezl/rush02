@@ -6,7 +6,7 @@
 /*   By: favillag <favillag@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 20:44:22 by favillag          #+#    #+#             */
-/*   Updated: 2026/08/30 21:58:35 by favillag         ###   ########.fr       */
+/*   Updated: 2026/08/30 22:28:17 by favillag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ void	print_word(char *buf, int i);
 void	ft_eval_hundreds(char *buf, char digit);
 int		ft_eval_tens(char *buf, char *num, int i);
 void	ft_evaluate_numbers(char *buf, char *num);
+int		ft_is_numeric(char *str);
+int		ft_parse_args(int argc, char *argv[], char **dict, char **num);
 
 #endif
