@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict_iterator.c                                    :+:      :+:    :+:   */
+/*   ft_zero_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: favillag <favillag@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/29 20:32:46 by favillag          #+#    #+#             */
-/*   Updated: 2026/08/29 20:40:29 by favillag         ###   ########.fr       */
+/*   Created: 2026/08/30 21:40:37 by favillag          #+#    #+#             */
+/*   Updated: 2026/08/30 21:40:39 by favillag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-char	*dict_iterator(char *dict)
+int	ft_zero_check(char *num, char *buf)
 {
-	char	c;
-	char	*buf;
-	int		fd;
-	int		buf_bytes;
+	int	i;
 
-	fd = open(dict, O_RDONLY);
-	if (fd == -1)
+	i = 0;
+	while (num[i] == '0')
+		i++;
+	if (num[i] == '\0' && i > 0)
 	{
-		write(2, "Error\n", 6);
-		return (0);
+		ft_write_num(buf, "0");
+		write(1, "\n", 1);
+		free(buf);
+		return (1);
 	}
-	buf_bytes = 0;
-	while (read(fd, &c, 1) > 0)
-		buf_bytes++;
-	close(fd);
-	buf = (char *) malloc(buf_bytes);
-	if (!buf)
-	{
-		write(2, "Error\n", 6);
-		return (0);
-	}
-	fd = open(dict, O_RDONLY);
-	read(fd, buf, buf_bytes);
-	close(fd);
-	return (buf);
+	return (0);
 }

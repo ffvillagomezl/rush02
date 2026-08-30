@@ -12,60 +12,57 @@
 
 #include "headers.h"
 
-int		ft_print_condition(int count, int i, char *buf);
-void	ft_write_num(char *buf, char *digit);
-int		is_bk_len1(int digit_len, int count);
-int		is_bk(char *buf, int i, int j, int digit_len);
-
-int	ft_print_condition(int count, int i, char *buf)
+int	match_line(char *buf, int i, char *digits, int digit_len)
 {
-	count = 1;
-	i++;
-	while (buf[i] == ' ' || buf[i] == ':')
+	int	j;
+
+	j = 0;
+	while (j < digit_len && buf[i + j] == digits[j])
+		j++;
+	if (j == digit_len)
+	{
+		i += j;
+		while (buf[i] == ' ')
+			i++;
+		if (buf[i] == ':')
+			return (i);
+	}
+	return (-1);
+}
+
+void	print_word(char *buf, int i)
+{
+	if (buf[i] == ':')
 		i++;
-	while (buf[i] != '\n')
+	while (buf[i] == ' ')
+		i++;
+	while (buf[i] && buf[i] != '\n')
 	{
 		write(1, &buf[i], 1);
 		i++;
 	}
-	return (count);
+	write(1, " ", 1);
 }
 
-int	is_bk_len1(int digit_len, int count)
-{
-	return (digit_len == 1 && count == 1);
-}
-
-int	is_bk(char *buf, int i, int j, int digit_len)
-{
-	return (buf[i] == '\n' && j == digit_len - 1 && digit_len != 1);
-}
-
-void	ft_write_num(char *buf, char *digit)
+void	ft_write_num(char *buf, char *digits)
 {
 	int	i;
-	int	j;
 	int	digit_len;
-	int	count;
+	int	colon_pos;
 
 	i = 0;
-	j = 0;
-	digit_len = ft_strlen(digit);
+	digit_len = ft_strlen(digits);
 	while (buf[i])
 	{
-		while (buf[i] == digit[j])
+		if (i == 0 || buf[i - 1] == '\n')
 		{
-			if (j == digit_len - 1 && (buf[i + 1] == ' ' || buf[i + 1] == ':'))
+			colon_pos = match_line(buf, i, digits, digit_len);
+			if (colon_pos != -1)
 			{
-				count = ft_print_condition(count, i, buf);
-				break ;
+				print_word(buf, colon_pos);
+				return ;
 			}
-			j++;
-			i++;
 		}
-		if (is_bk_len1(digit_len, count) || (is_bk(buf, i, j, digit_len)))
-			break ;
-		j = 0;
 		i++;
 	}
 }

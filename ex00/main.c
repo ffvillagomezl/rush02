@@ -19,18 +19,24 @@ int	main(int argc, char *argv[])
 	char	*buf;
 
 	dict = "numbers.dict";
-	if (argc > 3 || argc <= 1)
-		write(2, "Error\n", 6);
 	if (argc == 2)
 		num = argv[1];
-	if (argc == 3)
+	else if (argc == 3)
 	{
 		dict = argv[1];
 		num = argv[2];
 	}
+	else
+	{
+		write(2, "Error\n", 6);
+		return (0);
+	}
 	buf = dict_iterator(dict);
-	write(1, buf, 691);
-	//ft_write_num(buf, "0");
+	if (!buf)
+		return (0);
+	if (ft_zero_check(num, buf))
+		return (0);
+	ft_divide_in_groups(buf, num, dict);
 	free(buf);
 	return (0);
 }

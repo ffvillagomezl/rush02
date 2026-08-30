@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict_iterator.c                                    :+:      :+:    :+:   */
+/*   ft_alloc_group.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: favillag <favillag@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/29 20:32:46 by favillag          #+#    #+#             */
-/*   Updated: 2026/08/29 20:40:29 by favillag         ###   ########.fr       */
+/*   Created: 2026/08/30 21:50:40 by favillag          #+#    #+#             */
+/*   Updated: 2026/08/30 21:50:44 by favillag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-char	*dict_iterator(char *dict)
+char	*ft_alloc_group(char *num, int num_len, int i, int *curr)
 {
-	char	c;
-	char	*buf;
-	int		fd;
-	int		buf_bytes;
+	char	*group;
+	int		len;
+	int		j;
 
-	fd = open(dict, O_RDONLY);
-	if (fd == -1)
+	if (i == 0)
+		len = get_group_len(num_len);
+	else
+		len = 3;
+	group = malloc(len + 1);
+	if (!group)
+		return (NULL);
+	j = 0;
+	while (j < len)
 	{
-		write(2, "Error\n", 6);
-		return (0);
+		group[j] = num[*curr + j];
+		j++;
 	}
-	buf_bytes = 0;
-	while (read(fd, &c, 1) > 0)
-		buf_bytes++;
-	close(fd);
-	buf = (char *) malloc(buf_bytes);
-	if (!buf)
-	{
-		write(2, "Error\n", 6);
-		return (0);
-	}
-	fd = open(dict, O_RDONLY);
-	read(fd, buf, buf_bytes);
-	close(fd);
-	return (buf);
+	group[j] = '\0';
+	*curr += len;
+	return (group);
 }
