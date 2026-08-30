@@ -2,7 +2,7 @@
 NAME		= rush-02
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
-SRCS		= main.c dict_iterator.c ft_write_num.c ft_strlen.c \
+SRCS		= main.c ft_dictonary_iterator.c ft_write_num.c ft_strlen.c \
 			  ft_evaluate_numbers.c ft_divide_in_groups.c \
 			  ft_alloc_group.c ft_zero_check.c ft_is_numeric.c
 

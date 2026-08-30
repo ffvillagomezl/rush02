@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-char	*dict_iterator(char *dict);
+char	*ft_dictonary_iterator(char *dict);
 int		ft_strlen(char *str);
 int		ft_zero_check(char *num, char *buf);
 void	ft_divide_in_groups(char *buf, char *num, char *dict);

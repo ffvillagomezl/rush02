@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	buf = dict_iterator(dict);
+	buf = ft_dictonary_iterator(dict);
 	if (!buf)
 		return (0);
 	if (ft_zero_check(num, buf))
