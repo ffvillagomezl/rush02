@@ -12,6 +12,10 @@
 
 #include "headers.h"
 
+/*
+ * Calcula la longitud de una cadena de caracteres iterando
+ * hasta encontrar el carácter nulo '\0'.
+ */
 int	ft_strlen(char *str)
 {
 	int	i;
